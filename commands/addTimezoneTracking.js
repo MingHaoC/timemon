@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, bold, time } = require('discord.js');
+const { SlashCommandBuilder, bold, PermissionFlagsBits } = require('discord.js');
 require("dotenv").config();
 const getFirstMessage = require('../ultis/getFirstMessage');
 const getTimeInfo = require('../ultis/getTimeInfo');
@@ -8,6 +8,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('addtimezone')
 		.setDescription('Will add a timezone to track to the list of chat')
+    .setDefaultMemberPermissions(PermissionFlagsBits.administrator)
     .addStringOption(option =>
 			option.setName('timezone')
 				.setDescription('time zone you want to track')
@@ -34,7 +35,7 @@ module.exports = {
           { name: "Europe/London", value: "Europe/London" }
         )),
 	async execute(interaction, client) {
-    let channelId = '1102893862718021702';
+    let channelId = process.env.CHANNELID;
     let timezone = interaction.options.getString('timezone', true).toLowerCase();
     let messages = await getFirstMessage(client, channelId);
     if(messages.length > 1) {

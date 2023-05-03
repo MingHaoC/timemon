@@ -57,7 +57,6 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 // Log in to Discord with your client's token
-console.error(process.env.TOKEN);
 client.login(process.env.TOKEN).then((res) => {
 	var time = new Date(),
   secondsRemaining = (60 - time.getSeconds()) * 1000;
